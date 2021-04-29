@@ -76,7 +76,6 @@ export default function Dashboard() {
             <Text>Retention</Text>
             <Chart options={options} series={series} type='area' height={160} /> 
           </Box>
-
         </SimpleGrid>
       </Flex>
     </Flex>
