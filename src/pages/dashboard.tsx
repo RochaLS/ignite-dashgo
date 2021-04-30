@@ -55,25 +55,25 @@ export default function Dashboard() {
   return (
     <Flex direction='column' h='100vh'>
       <Header />
-      <Flex width='100%' my='6' maxWidth={1480} mx='auto'>
+      <Flex width='100%' my='6' maxWidth={1480} mx='auto' px='6'>
         <SideBar />
         <SimpleGrid flex='1' gap='4' minChildWidth='320px' align='flex-start'>
           <Box
-            p='8'
+            p={['6','8']}
             bg='gray.800'
             borderRadius={8}
             pb='4'
           >
-            <Text>Week subscriptions</Text>
+            <Text fontSize='lg' mb='4'>Week subscriptions</Text>
             <Chart options={options} series={series} type='area' height={160} />
           </Box>
           <Box
-            p='8'
+            p={['6','8']}
             bg='gray.800'
             borderRadius={8}
             pb='4'
           >
-            <Text>Retention</Text>
+            <Text fontSize='lg' mb='4'>Retention</Text>
             <Chart options={options} series={series} type='area' height={160} /> 
           </Box>
         </SimpleGrid>
