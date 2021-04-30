@@ -13,7 +13,7 @@ export default function UserList() {
     <Box>
       <Header />
 
-      <Flex width='100%' my='6' maxWidth={1480} mx='auto'>
+      <Flex width='100%' my='6' maxWidth={1480} mx='auto' px='6'>
         <SideBar />
 
         <Box flex='1' boderRadius={8} bg='gray.800' p='8'>
@@ -37,7 +37,6 @@ export default function UserList() {
                 </Th>
                 <Th>User</Th>
                 { isWideVersion && <Th>Register date</Th> }
-                <Th w='8'></Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -52,19 +51,6 @@ export default function UserList() {
                   </Box>
                 </Td>
                 { isWideVersion && <Td>27 de Abril, 2021</Td> }
-               
-                  {isWideVersion && (
-                  <Td>
-                    <Button
-                      as='a' 
-                      size='sm' 
-                      fontSize='small' 
-                      colorScheme='purple' 
-                      leftIcon={<Icon as={RiPencilLine} fontSize='16' />}>
-                        Edit
-                    </Button>
-                  </Td>
-                  )}
               </Tr>
             </Tbody>
           </Table>
