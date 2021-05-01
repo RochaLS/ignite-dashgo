@@ -2,9 +2,12 @@ import { Flex, Box, Heading, Divider, VStack, SimpleGrid, HStack, Button } from 
 import { SideBar } from '../../components/Sidebar'
 import { Input } from '../../components/Form/input'
 import Link from 'next/link'
+import { Header } from '../../components/Header'
 
 export default function CreateUser() {
   return (
+    <>
+    <Header />
     <Flex width='100%' my='6' maxWidth={1480} mx='auto' px='6'>  
       <SideBar />
       <Box flex='1' boderRadius={8} bg='gray.800' p={['6','8']}>
@@ -34,6 +37,6 @@ export default function CreateUser() {
         </Flex>
       </Box>
     </Flex>
+    </>
   )
-  
 }
