@@ -17,11 +17,17 @@ export default function UserList() {
         id: user.id,
         name: user.name,
         email: user.email,
-        createdAt: new Date(user.createdAt).toLocaleDateString() 
+        createdAt: new Date(user.createdAt).toLocaleDateString('en-CA', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric'
+        }) 
       }
     })
 
     return users
+  }, {
+    staleTime: 1000 * 5 // 5 seconds is how much time the data will be fresh
   })
 
   const isWideVersion = useBreakpointValue({
