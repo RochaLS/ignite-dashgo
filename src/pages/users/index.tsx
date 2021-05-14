@@ -4,9 +4,7 @@ import { RiAddLine } from 'react-icons/ri'
 import { Header } from '../../components/Header'
 import { Pagination } from '../../components/Pagination'
 import { SideBar } from '../../components/Sidebar'
-import { useQuery } from 'react-query'
 import React from 'react'
-import { api } from '../../services/api'
 import { useUsers } from '../../services/hooks/useUsers'
 
 export default function UserList() {

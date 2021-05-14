@@ -5,7 +5,7 @@ type User = {
   name: string;
   email: string;
   id: string;
-  created_at: string;
+  createdAt: string;
 
 }
 
