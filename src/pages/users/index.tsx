@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Th, Thead, Tr, Text, useBreakpointValue, Spinner } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Th, Thead, Tr, Text, useBreakpointValue, Spinner, Link as ChakraLink } from '@chakra-ui/react'
 import Link from 'next/link'
 import { RiAddLine } from 'react-icons/ri'
 import { Header } from '../../components/Header'
@@ -6,15 +6,32 @@ import { Pagination } from '../../components/Pagination'
 import { SideBar } from '../../components/Sidebar'
 import React from 'react'
 import { useUsers } from '../../services/hooks/useUsers'
+import { useState } from 'react'
+import { queryClient } from '../../services/queryClient'
+import { api } from '../../services/api'
 
 export default function UserList() {
 
-  const { data, isLoading, error, isFetching } = useUsers()
+  const [page, setPage] = useState(1)
+  const { data, isLoading, error, isFetching } = useUsers(page)
+
+  console.log(page)
 
   const isWideVersion = useBreakpointValue({
     bade: false,
     lg: true
   })
+
+  async function handlePrefetchUser(userId) {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const response = await api.get(`users/${userId}`)
+
+      return response.data
+    }, {
+      staleTime: 1000 * 60 * 10 //10 min
+    })
+  }
+
   return (
     <Box>
       <Header />
@@ -61,7 +78,7 @@ export default function UserList() {
               </Tr>
             </Thead>
             <Tbody>
-              { data.map(user => {
+              { data.users.map(user => {
                 return (
                   <Tr>
                     <Td px={['4','4','6']}>
@@ -69,7 +86,9 @@ export default function UserList() {
                     </Td>
                     <Td>
                       <Box>
-                        <Text fontWeight='bold'>{user.name}</Text>
+                        <ChakraLink color='purple.400' onMouseEnter={() => handlePrefetchUser(user.id)}>
+                          <Text fontWeight='bold'>{user.name}</Text>
+                        </ChakraLink>
                         <Text fontSize='sm' color='gray.300'>{user.email}</Text>
                       </Box>
                     </Td>
@@ -80,9 +99,9 @@ export default function UserList() {
             </Tbody>
             </Table>
             <Pagination
-              totalCountRegisters={200}
-              currentPage={2}
-              onPageChange={() => {}} />
+              totalCountRegisters={data.totalCount}
+              currentPage={page}
+              onPageChange={setPage} />
           </>
          )
          }
