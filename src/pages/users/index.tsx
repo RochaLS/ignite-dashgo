@@ -10,10 +10,12 @@ import { useState } from 'react'
 import { queryClient } from '../../services/queryClient'
 import { api } from '../../services/api'
 
-export default function UserList() {
+export default function UserList({ users }) {
 
   const [page, setPage] = useState(1)
-  const { data, isLoading, error, isFetching } = useUsers(page)
+  const { data, isLoading, error, isFetching } = useUsers(page, {
+    initialData: users
+  })
 
   console.log(page)
 

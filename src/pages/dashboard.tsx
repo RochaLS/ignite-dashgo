@@ -3,6 +3,8 @@ import { Header } from "../components/Header"
 import { SideBar } from '../components/Sidebar'
 import dynamic from 'next/dynamic'
 import { ApexOptions } from 'apexcharts'
+import { GetServerSideProps } from 'next'
+import { getUsers } from '../services/hooks/useUsers'
 
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
@@ -80,4 +82,15 @@ export default function Dashboard() {
       </Flex>
     </Flex>
   ) 
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users, totalCount } = await getUsers(1)
+
+
+  return {
+    props: {
+      users,
+    }
+  }
 }
